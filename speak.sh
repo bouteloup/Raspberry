@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #Annoncer l'heure toute les heures
 
@@ -42,6 +42,10 @@ do
 	done
 		sleep 1h
 
+MESSAGE="Il est actuellement "$HEURE" heure"
+mplayer "http://translate.google.com/translate_tts?tl=fr&q=$MESSAGE"
+
+#POUR REVEIL
 HEURE=$(date +'%k')
 MINUTE=$(date +'%M')
 NOMJOUR=$(date +'%A')
@@ -49,7 +53,7 @@ NUMJOUR=$(date +'%d')
 NOMMOIS=$(date +'%B')
 ANNEE=$(date +'%Y')
 SECOND=$(date +'%S')
-MESSAGE="Salut Mr Bouteloup. Nous sommes le "$NOMJOUR" "$NUMJOUR" "$NOMMOIS" "$ANNEE", et il ai "$HEURE" heure"$MINUTE
-mplayer "http://translate.google.com/translate_tts?tl=fr&q=$MESSAGE"
+#MESSAGE="Salut Mr Bouteloup. Nous sommes le "$NOMJOUR" "$NUMJOUR" "$NOMMOIS" "$ANNEE", et il ai "$HEURE" heure"$MINUTE
+#mplayer "http://translate.google.com/translate_tts?tl=fr&q=$MESSAGE"
 
 done
