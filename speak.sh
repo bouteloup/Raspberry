@@ -4,46 +4,42 @@
 
 while [ 1 ]
 do
+    MINUTE=$(date +'%M')
+    SECOND=$(date +'%S')
+    HEURE=$(date +'%k')
+    
+    while [ $HEURE -ge 15 -a $HEURE -le 23 ]
+    do
 	MINUTE=$(date +'%M')
-	SECOND=$(date +'%S')
+        SECOND=$(date +'%S')
 	HEURE=$(date +'%k')
-
-	while [ $HEURE -ge 15 -a $HEURE -le 23 ]
+	
+	while [ $SECOND != 00 ]
+        do
+            sleep 1s
+	    SECOND=$(date +'%S')
+        done
+	
+	#echo "Calibrage -- OK"
+	
+	while [ $MINUTE -eq 59 ]
 	do
-		MINUTE=$(date +'%M')
-        	SECOND=$(date +'%S')
-		HEURE=$(date +'%k')
-
-	        while [ $SECOND != 00 ]
-        	do
-                	sleep 1s
-	                SECOND=$(date +'%S')
-        	done
-
-		echo "Calibrage -- OK"
-
-		while [ $MINUTE != 00 ]
-		do
-			sleep 1m
-			MINUTE=$(date +'%M')
-				while [ $MINUTE -eq 59 ]
-				do
-					MINUTE=$(date +'%M')
-					sleep 1s
-				done
-			sleep 1s
-		done
-
-		HEURE=$(date +'%k')
-		if [ $HEURE == 23 ]
-		then
-			sleep 18h
-		fi
+	    MINUTE=$(date +'%M')
+	    SECOND=$(date +'%S')
+	    sleep 1s
 	done
-		sleep 1h
 
-MESSAGE="Il est actuellement "$HEURE" heure"
-mplayer "http://translate.google.com/translate_tts?tl=fr&q=$MESSAGE"
+	if [ $MINUTE -eq 00 ]
+	then
+	    echo "lol"
+	    MESSAGE="Il est "$HEURE" heures"
+	    mplayer "http://translate.google.com/translate_tts?tl=fr&q=$MESSAGE"
+	fi
+	    
+	sleep 1m
+	# Attention ! Après l'exécution du mplayer, le temps n'est plus synchronisé, il se resynchronise donc.
+    done
+	
 
 #POUR REVEIL
 HEURE=$(date +'%k')
@@ -53,8 +49,7 @@ NUMJOUR=$(date +'%d')
 NOMMOIS=$(date +'%B')
 ANNEE=$(date +'%Y')
 SECOND=$(date +'%S')
-<<<<<<< HEAD
-MESSAGE="Salut Mr Bouteloup. Nous sommes le "$NOMJOUR" "$NUMJOUR" "$NOMMOIS" "$ANNEE", et il est "$HEURE" heures "$MINUTE
-mplayer "http://translate.google.com/translate_tts?tl=fr&q=$MESSAGE"
+#MESSAGE="Salut Mr Bouteloup. Nous sommes le "$NOMJOUR" "$NUMJOUR" "$NOMMOIS" "$ANNEE", et il est "$HEURE" heures "$MINUTE
+#mplayer "http://translate.google.com/translate_tts?tl=fr&q=$MESSAGE"
 
 done
