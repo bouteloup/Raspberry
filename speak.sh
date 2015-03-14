@@ -8,7 +8,7 @@ do
 	SECOND=$(date +'%S')
 	HEURE=$(date +'%k')
 
-	while [ $HEURE -ge 15 && $HEURE -le 23 ]
+	while [ $HEURE -ge 15 -a $HEURE -le 23 ]
 	do
 		MINUTE=$(date +'%M')
         	SECOND=$(date +'%S')
@@ -26,7 +26,7 @@ do
 		do
 			sleep 1m
 			MINUTE=$(date +'%M')
-				while [ $MINUTE == 59 ]
+				while [ $MINUTE -eq 59 ]
 				do
 					MINUTE=$(date +'%M')
 					sleep 1s
@@ -49,7 +49,7 @@ NUMJOUR=$(date +'%d')
 NOMMOIS=$(date +'%B')
 ANNEE=$(date +'%Y')
 SECOND=$(date +'%S')
-MESSAGE="Salut Mr Bouteloup. Nous sommes le "$NOMJOUR" "$NUMJOUR" "$NOMMOIS" "$ANNEE", et il ai "$HEURE" heure"$MINUTE
+MESSAGE="Salut Mr Bouteloup. Nous sommes le "$NOMJOUR" "$NUMJOUR" "$NOMMOIS" "$ANNEE", et il est "$HEURE" heures "$MINUTE
 mplayer "http://translate.google.com/translate_tts?tl=fr&q=$MESSAGE"
 
 done
