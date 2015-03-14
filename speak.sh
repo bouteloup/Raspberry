@@ -29,6 +29,9 @@ do
 	    sleep 1s
 	done
 
+	# Actualisation des minutes
+	MINUTE=$(date +'%M')
+	
 	if [ $MINUTE -eq 00 ]
 	then
 	    echo "lol"
