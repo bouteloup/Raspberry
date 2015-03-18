@@ -1,18 +1,13 @@
 #!/bin/bash
 
-#Annoncer l'heure toute les heures
-
 while [ 1 ]
 do
-	MINUTE=$(date +'%M')
-	SECOND=$(date +'%S')
 	HEURE=$(date +'%k')
 
-	while [ $HEURE -ge 15 && $HEURE -le 23 ]
+	while [ $HEURE -ge 9 -a $HEURE -le 23 ]
 	do
 		MINUTE=$(date +'%M')
         	SECOND=$(date +'%S')
-		HEURE=$(date +'%k')
 
 	        while [ $SECOND != 00 ]
         	do
@@ -20,11 +15,10 @@ do
 	                SECOND=$(date +'%S')
         	done
 
-		echo "Calibrage -- OK"
 
 		while [ $MINUTE != 00 ]
 		do
-			sleep 1m
+			sleep 30s
 			MINUTE=$(date +'%M')
 				while [ $MINUTE == 59 ]
 				do
@@ -34,26 +28,32 @@ do
 			sleep 1s
 		done
 
-		HEURE=$(date +'%k')
-		if [ $HEURE == 23 ]
+	HEURE=$(date +'%k')
+	NUMJOUR1=$(date | cut -c 1-5)
+	NUMJOUR2=$(date | cut -c 1-8)
+
+	if [ $NUMJOUR1 == "lundi" || $NUMJOUR1 == "mardi" || $NUMJOUR2 == "mercredi" || $NUMJOUR1 == "jeudi" ]
+	then
+		if [ $HEURE == 6 ]
 		then
-			sleep 18h
+			sleep 40m
+			#mplayer LIENDELAPLAYLIST
 		fi
+	fi
+
+	if [ $NUMJOUR2 == "vendredi" ]
+	then
+		if [ $HEURE == 7 ]
+		then
+			sleep 40m
+			#mplayer LIENDELAPLAYLIST
+		fi
+	fi
+
+	MESSAGE="Il est actuellement "$HEURE" heure."
+	mplayer /home/pi/sncf.mp3
+	mplayer "http://translate.google.com/translate_tts?tl=fr&q=$MESSAGE"
+	sleep 2m
 	done
 		sleep 1h
-
-MESSAGE="Il est actuellement "$HEURE" heure"
-mplayer "http://translate.google.com/translate_tts?tl=fr&q=$MESSAGE"
-
-#POUR REVEIL
-HEURE=$(date +'%k')
-MINUTE=$(date +'%M')
-NOMJOUR=$(date +'%A')
-NUMJOUR=$(date +'%d')
-NOMMOIS=$(date +'%B')
-ANNEE=$(date +'%Y')
-SECOND=$(date +'%S')
-#MESSAGE="Salut Mr Bouteloup. Nous sommes le "$NOMJOUR" "$NUMJOUR" "$NOMMOIS" "$ANNEE", et il ai "$HEURE" heure"$MINUTE
-#mplayer "http://translate.google.com/translate_tts?tl=fr&q=$MESSAGE"
-
 done
