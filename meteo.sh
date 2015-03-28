@@ -41,8 +41,9 @@ TEMPERATURE_MIN=$(cut -d  '"' -f 83 indice)
 TEMPERATURE_MAX=$(cut -d  '"' -f 85 indice)
 
 #Haut-parleur - Annonce de la météo
-METEO_ANNONCE="Demain, nous seront $NEXT_DAY : Météo pour demain  : Description : $DESCRIPTION"
-METEO_COMPLET="Température minimal : $TEMPERATURE_MIN degrés : Maximum : $TEMPERATURE_MAX degrés"
-mplayer "http://translate.google.com/translate_tts?ie=UTF-8&tl=fr&q=$METEO_ANNONCE"
+DAY_NEXT="Demain, nous seront $NEXT_DAY"
+METEO_COMPLET="Météo pour demain, description $DESCRIPTION Température minimal $TEMPERATURE_MIN degré Maximum $TEMPERATURE_MAX degré"
+ANNONCE="Je te souhaite une bonne fin de soirée et bon courage pour demain"
+mplayer "http://translate.google.com/translate_tts?ie=UTF-8&tl=fr&q=$DAY_NEXT"
 mplayer "http://translate.google.com/translate_tts?ie=UTF-8&tl=fr&q=$METEO_COMPLET"
-
+mplayer "http://translate.google.com/translate_tts?ie=UTF-8&tl=fr&q=$ANNONCE"
